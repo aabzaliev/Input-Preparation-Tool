@@ -8,11 +8,19 @@ overviewfun <- function(datawithoutlevels, datawithlevels) {
     tempcoltable    <- table(Label = datawithlevels[,colnames(datawithlevels)[k]], Value = datawithoutlevels[,colnames(datawithoutlevels)[k]],useNA = "ifany")
     tempcolmat      <- matrix(NA,length(rownames(tempcoltable)),4)
     tempcolmat[,4]  <- colnames(datawithoutlevels)[k]
-    tempcolmat[,1]  <- rownames(tempcoltable)
-    for (i in 1:(length(colnames(tempcoltable))))
+    
+    #reorder levels
+    for (j in 1:length(rownames(tempcoltable)))
     {
-      tempcolmat[i,2]=colnames(tempcoltable)[i]
-      tempcolmat[i,3]=tempcoltable[i,i]
+      for (l in 1:length(colnames(tempcoltable)))
+      {
+        if (tempcoltable[j,l]>0) 
+        {
+          tempcolmat[j,1] <- rownames(tempcoltable)[j]
+          tempcolmat[j,2] <- colnames(tempcoltable)[l]
+          tempcolmat[j,3] <- tempcoltable[j,l]
+        }
+      }
     }
     
     if(k==1)

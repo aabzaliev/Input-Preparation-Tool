@@ -68,7 +68,7 @@ recodefun <- function(data, recodemat, defaultmissingvalue = NULL) {
       #append default missing value
       if (!is.null(defaultmissingvalue))
       {
-        temprecoding[[".default"]] <- defaultmissingvalue
+        temprecoding[[".missing"]] <- defaultmissingvalue
       }
       
       #append data
@@ -77,7 +77,7 @@ recodefun <- function(data, recodemat, defaultmissingvalue = NULL) {
       
       
       #recode 
-      data[[as.character(vartorecode[j])]] <- do.call(dplyr::recode_factor, args = temprecoding)
+      data[[as.character(vartorecode[j])]] <- do.call(dplyr::recode, args = temprecoding)
     } 
   }
   
